@@ -3,18 +3,13 @@
  * @author obf1313
  */
 // https://juejin.cn/post/6844903943902855176
-const React = require('react');
-const { renderToString } = require('react-dom/server');
-const express = require('express');
+import { renderToString } from 'react-dom/server';
+import express from 'express';
+import React from 'react';
+import { matchRoutes } from 'react-router-config';
+import routes from './routes-config.js';
 
 const app = express();
-
-// React 组件
-const Index = (props) => {
-  return (
-    <div>{props.data.title}</div>
-  );
-}
 
 // 2. 获取数据的方法和逻辑些在哪里？
 // 但该方法和组件没有任何关联，我们更希望的是每个路由（？）都有自己的 fetch 方法。
@@ -30,8 +25,23 @@ const fetch = () => {
 // 首先我们会发现我在 server 端定义了路由 '/'，但是在 react SPA 模式下我们需要使用react-router来定义路由。那是不是就需要维护两套路由呢？
 // 定义了路由 /，但在 SPA 模式下我们需要使用 react-router 定义路由。
 app.get('/', (req, res) => {
+  const url = req.url;
+  // 简单容错，排除图片等资源文件的请求
+  if (url.indexOf('.') !== -1) {
+    res.send('');
+    return false;
+  }
   const data = fetch();
-  res.send(renderToString(<Index data={data} />))
+  res.writeHead(200, {
+    'Content-Type': 'text/html'
+  });
+  // 查找组件
+  const branch = matchRoutes(routes, url);
+  // 得到组件
+  const Component = branch[0].route.component;
+  // 将组件渲染为 html 字符串
+  const html = renderToString(<Component data={data} />);
+  res.send(html);
 });
 
 app.listen(3000, () => {
