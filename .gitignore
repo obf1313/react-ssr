@@ -104,3 +104,6 @@ dist
 .tern-port
 
 compiled.js
+
+key
+key.pub
