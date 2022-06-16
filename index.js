@@ -1,3 +1,7 @@
+/**
+ * @descriptor 服务
+ * @author obf1313
+ */
 // https://juejin.cn/post/6844903943902855176
 const React = require('react');
 const { renderToString } = require('react-dom/server');
