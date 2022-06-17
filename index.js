@@ -32,9 +32,7 @@ app.get('/', (req, res) => {
     return false;
   }
   const data = fetch();
-  res.writeHead(200, {
-    'Content-Type': 'text/html'
-  });
+  console.log('test branch rebase');
   // 查找组件
   const branch = matchRoutes(routes, url);
   console.log('branch', branch);
