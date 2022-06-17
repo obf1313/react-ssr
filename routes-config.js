@@ -2,6 +2,7 @@
  * @descriptor 路由配置
  * @author obf1313
  */
+import React from 'react';
 const Detail = () => {
   return (
     <div>

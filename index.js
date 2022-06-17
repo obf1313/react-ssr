@@ -22,7 +22,7 @@ const fetch = () => {
 }
 
 // 1. 双端路由如何维护？
-// 首先我们会发现我在 server 端定义了路由 '/'，但是在 react SPA 模式下我们需要使用react-router来定义路由。那是不是就需要维护两套路由呢？
+// 首先我们会发现我在 server 端定义了路由 '/'，但是在 react SPA 模式下我们需要使用 react-router 来定义路由。那是不是就需要维护两套路由呢？
 // 定义了路由 /，但在 SPA 模式下我们需要使用 react-router 定义路由。
 app.get('/', (req, res) => {
   const url = req.url;
@@ -32,12 +32,8 @@ app.get('/', (req, res) => {
     return false;
   }
   const data = fetch();
-  res.writeHead(200, {
-    'Content-Type': 'text/html'
-  });
   // 查找组件
   const branch = matchRoutes(routes, url);
-  console.log('branch', branch);
   // 得到组件
   const Component = branch[0].route.component;
   // 将组件渲染为 html 字符串
