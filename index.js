@@ -25,7 +25,6 @@ const fetch = () => {
 // 首先我们会发现我在 server 端定义了路由 '/'，但是在 react SPA 模式下我们需要使用react-router来定义路由。那是不是就需要维护两套路由呢？
 // 定义了路由 /，但在 SPA 模式下我们需要使用 react-router 定义路由。
 app.get('/', (req, res) => {
-  console.log('222');
   const url = req.url;
   // 简单容错，排除图片等资源文件的请求
   if (url.indexOf('.') !== -1) {
