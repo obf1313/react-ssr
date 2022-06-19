@@ -3,11 +3,11 @@
  * @author obf1313
  */
 // https://juejin.cn/post/6844903943902855176
-import { renderToString } from 'react-dom/server';
-import http from 'http';
 import React from 'react';
+import http from 'http';
+import { renderToString } from 'react-dom/server';
 import { matchRoutes } from 'react-router-config';
-import routes from './routes-config';
+import routes from './route/routes-config';
 
 // 1. 双端路由如何维护？
 // 首先我们会发现我在 server 端定义了路由 '/'，但是在 react SPA 模式下我们需要使用 react-router 来定义路由。那是不是就需要维护两套路由呢？
